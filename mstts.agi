@@ -100,9 +100,9 @@ for ($AGI{arg_1}) {
 
 # Setting up language, gender and interrupt keys #
 
-if (length($AGI{arg_3})) {
-	$intkey = "0123456789#*" if ($AGI{arg_3} eq "any");
-	$intkey = $AGI{arg_3} if ($AGI{arg_3} =~ /^[0-9*#]+$/);
+if (length($AGI{arg_4})) {
+	$intkey = "0123456789#*" if ($AGI{arg_4} eq "any");
+	$intkey = $AGI{arg_4} if ($AGI{arg_4} =~ /^[0-9*#]+$/);
 }
 
 fatal_log("Unsupported language/gender combination.") if (!exists $lang_list{"$lang-$gender"});
