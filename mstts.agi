@@ -74,12 +74,13 @@ my @result;
 my $atoken;
 my $fh;
 my $tmpname;
-my $intkey  = "";
-my $tmpdir  = "/tmp";
-my $maxlen  = 4096;
-my $timeout = 10;
-my $url     = "https://" . $region . ".tts.speech.microsoft.com/cognitiveservices/v1";
-my %lang_list = get_lang_list();
+my $intkey        = "";
+my $tmpdir        = "/tmp";
+my $maxlen        = 4096;
+my $timeout       = 10;
+my $url           = "https://speech.platform.bing.com/synthesize";
+my $auth_endpoint = "https://api.cognitive.microsoft.com/sts/v1.0/issueToken";
+my %lang_list     = get_lang_list();
 
 # Store AGI input: Text, Language, Interrupt, Gender #
 ($AGI{arg_1}, $AGI{arg_2}, $AGI{arg_3}, $AGI{arg_4}) = @ARGV;
@@ -240,7 +241,7 @@ sub get_access_token {
 		fatal_log("No API Key provided.") if (!$key);
 		console_log("Getting a new access token.") if ($debug);
 		my $response = $ua->post(
-			"https://" . $region . ".api.cognitive.microsoft.com/sts/v1.0/issueToken",
+			$auth_endpoint,
 			"Ocp-Apim-Subscription-Key" => $key,
 		);
 		if ($response->is_success) {
