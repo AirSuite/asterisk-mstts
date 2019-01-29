@@ -192,7 +192,7 @@ foreach my $line (@text) {
 
 	my $data = "<speak version='1.0' xml:lang='" . $lang . "'><voice xml:lang='". $lang
 	. "' xml:gender='" . $gender . "' name='" . $lang_list{"$lang-$gender"}
-	. "'>" . $line ."</voice></speak>";
+	. "'><prosody volume='+20.00%'>" . $line ."</prosody></voice></speak>";
 	my $ua_response = $ua->post(
 		$url,
 		"Content-type" => "application/ssml+xml",
@@ -284,9 +284,7 @@ sub playback {
 	@response = checkresponse();
 	if ($response[0] >= 32 && chr($response[0]) =~ /[\w*#]/) {
 		console_log("Got digit ", chr($response[0])) if ($debug);
-		print "SET EXTENSION ", chr($response[0]), "\n";
-		checkresponse();
-		print "SET PRIORITY 1\n";
+		print "EXEC SET MSTTS_INTERRUPT_DIGIT=", chr($response[0]), ")\n";
 		checkresponse();
 	} elsif ($response[0] == -1) {
 		console_log("Failed to play $file");
