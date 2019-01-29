@@ -192,7 +192,7 @@ foreach my $line (@text) {
 
 	my $data = "<speak version='1.0' xml:lang='" . $lang . "'><voice xml:lang='". $lang
 	. "' xml:gender='" . $gender . "' name='" . $lang_list{"$lang-$gender"}
-	. "'><prosody volume='+20.00%'>" . $line ."</prosody></voice></speak>";
+	. "'>" . $line ."</voice></speak>";
 	my $ua_response = $ua->post(
 		$url,
 		"Content-type" => "application/ssml+xml",
